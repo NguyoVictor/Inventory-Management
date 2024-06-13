@@ -1,9 +1,17 @@
-# lib/helpers.py
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from lib.models.model_1 import Base
 
-def helper_1():
-    print("Performing useful function#1.")
+DATABASE_URL = "sqlite:///inventory.db"
 
+def get_engine():
+    return create_engine(DATABASE_URL)
 
-def exit_program():
-    print("Goodbye!")
-    exit()
+def init_db():
+    engine = get_engine()
+    Base.metadata.create_all(engine)
+
+def get_session():
+    engine = get_engine()
+    Session = sessionmaker(bind=engine)
+    return Session()
