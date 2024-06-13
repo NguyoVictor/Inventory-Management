@@ -1,6 +1,4 @@
-Sure! Here's a revised README file tailored to your Inventory Management System project.
 
----
 
 # Inventory Management System (IMS)
 
@@ -28,7 +26,7 @@ Take a look at the directory structure:
     ├── helpers.py
 ```
 
-## Setting Up the Environment
+## Setting UIMS-projectp the Environment
 
 1. **Clone the repository**:
    ```sh
