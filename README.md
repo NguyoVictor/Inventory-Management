@@ -32,26 +32,10 @@ Take a look at the directory structure:
 
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/yourusername/IMS-project.git
-   cd IMS-project
-   ```
+   git clone https://github.com/NguyoVictor/Inventory-Management.git
 
-2. **Create a virtual environment**:
-   ```sh
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   cd Inventory-Management
    ```
-
-3. **Install dependencies**:
-   ```sh
-   pip install -r requirements.txt
-   ```
-
-4. **Setup the database**:
-   ```sh
-   python setup.py
-   ```
-
 ## Running the Application
 
 Execute the main application script to start the CLI:
