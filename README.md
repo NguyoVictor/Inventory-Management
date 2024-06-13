@@ -1,16 +1,14 @@
-# Phase 3 CLI+ORM Project Template
-
-## Learning Goals
-
-- Discuss the basic directory structure of a CLI.
-- Outline the first steps in building a CLI.
+Sure! Here's a revised README file tailored to your Inventory Management System project.
 
 ---
 
+# Inventory Management System (IMS)
+
 ## Introduction
 
-You now have a basic idea of what constitutes a CLI. Fork and clone this lesson
-for a project template for your CLI.
+The Inventory Management System (IMS) is designed to help businesses keep track of their inventory levels, manage product details, and handle transactions involving inventory items. The system provides functionalities to add, update, delete, and query inventory items and transactions.
+
+## Project Structure
 
 Take a look at the directory structure:
 
@@ -19,154 +17,120 @@ Take a look at the directory structure:
 ├── Pipfile
 ├── Pipfile.lock
 ├── README.md
+├── app.py
+├── setup.py
+├── connection.py
 └── lib
     ├── models
     │   ├── __init__.py
-    │   └── model_1.py
+    │   └── models.py
     ├── cli.py
-    ├── debug.py
-    └── helpers.py
+    ├── helpers.py
 ```
 
-Note: The directory also includes two files named `CONTRIBUTING.md` and
-`LICENSE.md` that are specific to Flatiron's curriculum. You can disregard or
-delete the files if you want.
+## Setting Up the Environment
 
----
+1. **Clone the repository**:
+   ```sh
+   git clone https://github.com/yourusername/IMS-project.git
+   cd IMS-project
+   ```
 
-## Generating Your Environment
+2. **Create a virtual environment**:
+   ```sh
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   ```
 
-You might have noticed in the file structure- there's already a Pipfile!
+3. **Install dependencies**:
+   ```sh
+   pip install -r requirements.txt
+   ```
 
-Install any additional dependencies you know you'll need for your project by
-adding them to the `Pipfile`. Then run the commands:
+4. **Setup the database**:
+   ```sh
+   python setup.py
+   ```
 
-```console
-pipenv install
-pipenv shell
+## Running the Application
+
+Execute the main application script to start the CLI:
+```sh
+python app.py
 ```
 
----
+## Database Tables
 
-## Generating Your CLI
+### Products Table
+The products table stores information about each product in the inventory.
 
-A CLI is, simply put, an interactive script and prompts the user and performs
-operations based on user input.
+| Column Name | Data Type | Description |
+|-------------|------------|-------------|
+| product_id  | INTEGER    | Unique identifier for the product |
+| product_name| TEXT       | Name of the product |
+| category    | TEXT       | Category of the product |
 
-The project template has a sample CLI in `lib/cli.py` that looks like this:
+### Transactions Table
+The transactions table records each transaction involving inventory items.
 
-```py
-# lib/cli.py
+| Column Name   | Data Type | Description |
+|---------------|------------|-------------|
+| transaction_id| INTEGER    | Unique identifier for the transaction |
+| product_id    | INTEGER    | Identifier for the product |
+| quantity      | INTEGER    | Quantity of product involved |
+| date          | TEXT       | Date of transaction |
 
-from helpers import (
-    exit_program,
-    helper_1
-)
+### Suppliers Table
+The suppliers table stores information about suppliers who provide products.
 
+| Column Name   | Data Type | Description |
+|---------------|------------|-------------|
+| supplier_id   | INTEGER    | Unique identifier for the supplier |
+| supplier_name | TEXT       | Name of the supplier |
 
-def main():
-    while True:
-        menu()
-        choice = input("> ")
-        if choice == "0":
-            exit_program()
-        elif choice == "1":
-            helper_1()
-        else:
-            print("Invalid choice")
+## CLI Operations
 
+### Main CLI
+The main CLI script is located in `app.py`. This script initializes the database and presents a menu for the user to interact with the system.
 
-def menu():
-    print("Please select an option:")
-    print("0. Exit the program")
-    print("1. Some useful function")
+### Helpers
+Helper functions are located in `lib/helpers.py`. These functions perform specific tasks such as listing products, adding transactions, updating supplier information, etc.
 
+### Models
+The data models for the application are defined in `lib/models/models.py`. This includes the definitions for the `Product`, `Transaction`, and `Supplier` classes.
 
-if __name__ == "__main__":
-    main()
-```
+### Example Operations
 
-The helper functions are located in `lib/helpers.py`:
+1. **List Products**:
+   ```sh
+   python app.py
+   ```
 
-```py
-# lib/helpers.py
+2. **Add Product**:
+   Follow the prompts to enter product details.
 
-def helper_1():
-    print("Performing useful function#1.")
+3. **Update Product**:
+   Follow the prompts to update a product's details.
 
+4. **Delete Product**:
+   Follow the prompts to delete a product.
 
-def exit_program():
-    print("Goodbye!")
-    exit()
-```
+5. **List Transactions**:
+   Follow the prompts to view all transactions.
 
-You can run the template CLI with `python lib/cli.py`, or include the shebang
-and make it executable with `chmod +x`. The template CLI will ask for input, do
-some work, and accomplish some sort of task.
-
-Past that, CLIs can be whatever you'd like, as long as you follow the project
-requirements.
-
-Of course, you will update `lib/cli.py` with prompts that are appropriate for
-your application, and you will update `lib/helpers.py` to replace `helper_1()`
-with a useful function based on the specific problem domain you decide to
-implement, along with adding other helper functions to the module.
-
-In the `lib/models` folder, you should rename `model_1.py` with the name of a
-data model class from your specific problem domain, and add other classes to the
-folder as needed. The file `lib/models/__init__.py` has been initialized to
-create the necessary database constants. You need to add import statements to
-the various data model classes in order to use the database constants.
-
-You are also welcome to implement a different module and directory structure.
-However, your project should be well organized, modular, and follow the design
-principal of separation of concerns, which means you should separate code
-related to:
-
-- User interface
-- Data persistence
-- Problem domain rules and logic
-
----
-
-## Updating README.md
-
-`README.md` is a Markdown file that should describe your project. You will
-replace the contents of this `README.md` file with a description of **your**
-actual project.
-
-Markdown is not a language that we cover in Flatiron's Software Engineering
-curriculum, but it's not a particularly difficult language to learn (if you've
-ever left a comment on Reddit, you might already know the basics). Refer to the
-cheat sheet in this assignments's resources for a basic guide to Markdown.
-
-### What Goes into a README?
-
-This README serves as a template. Replace the contents of this file to describe
-the important files in your project and describe what they do. Each Python file
-that you edit should get at least a paragraph, and each function should be
-described with a sentence or two.
-
-Describe your actual CLI script first, and with a good level of detail. The rest
-should be ordered by importance to the user. (Probably functions next, then
-models.)
-
-Screenshots and links to resources that you used throughout are also useful to
-users and collaborators, but a little more syntactically complicated. Only add
-these in if you're feeling comfortable with Markdown.
-
----
+6. **Add Transaction**:
+   Follow the prompts to add a new transaction.
 
 ## Conclusion
 
-A lot of work goes into a good CLI, but it all relies on concepts that you've
-practiced quite a bit by now. Hopefully this template and guide will get you off
-to a good start with your Phase 3 Project.
+The Inventory Management System (IMS) is a comprehensive solution for managing inventory. It provides essential functionalities to handle products, transactions, and suppliers efficiently.
 
 Happy coding!
-
----
 
 ## Resources
 
 - [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
+
+---
+
+This README should now be more aligned with your Inventory Management System project, providing clear instructions and a structured overview of the project. Adjust the URLs and paths as necessary to match your repository and file structure.
